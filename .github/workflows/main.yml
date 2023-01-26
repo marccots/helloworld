@@ -43,7 +43,7 @@ jobs:
         fs.writeFileSync('folder_structure.json', json);"
       
     - name: Install @actions/github
-      run: npm install @actions/github  
+      run: npm ci @actions/github  
     
     - name: Commit and push JSON file
       uses: actions/github-script@v3
