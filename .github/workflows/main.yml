@@ -22,7 +22,7 @@ jobs:
       run: |
         node -e "const fs = require('fs');
         const path = require('path');
-        const directoryPath = path.join(__dirname, "./");
+        const directoryPath = process.env.GITHUB_WORKSPACE;
         const folderStructure = {};
 
         const getFolderStructure = (dir, obj) => {
