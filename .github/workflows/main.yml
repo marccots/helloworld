@@ -22,7 +22,7 @@ jobs:
       run: |
         node -e "const fs = require('fs');
         const path = require('path');
-        const directoryPath = path.join(__dirname, GITHUB_WORKSPACE);
+        const directoryPath = process.env.GITHUB_WORKSPACE;
         const folderStructure = {};
 
         const getFolderStructure = (dir, obj) => {
@@ -41,3 +41,6 @@ jobs:
 
         const json = JSON.stringify(folderStructure);
         fs.writeFileSync('folder_structure.json', json);"
+        
+      - name: Check json file
+        run: ls -la
