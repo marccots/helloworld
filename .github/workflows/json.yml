@@ -1,0 +1,19 @@
+name: Get Folder Structure
+
+on:
+  push:
+    branches:
+      - "master"
+
+jobs:
+  get_folder_structure:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Get Folder Structure
+      run: |
+        echo ${{ github.workspace }}
+        echo $GITHUB_WORKSPACE
