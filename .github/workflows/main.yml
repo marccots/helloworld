@@ -42,5 +42,5 @@ jobs:
         const json = JSON.stringify(folderStructure);
         fs.writeFileSync('folder_structure.json', json);"
         
-      - name: Check json file
-        run: ls -la
+    - name: Check json file
+      run: ls -la
