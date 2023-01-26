@@ -1,0 +1,43 @@
+name: Save JSON
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  get_folder_structure:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 14
+      
+    - name: Get Folder Structure
+      run: |
+        node -e "const fs = require('fs');
+        const path = require('path');
+        const directoryPath = path.join(__dirname, $GITHUB_WORKSPACE);
+        const folderStructure = {};
+
+        const getFolderStructure = (dir, obj) => {
+          fs.readdirSync(dir).forEach(file => {
+            const fullPath = path.join(dir, file);
+            if (fs.statSync(fullPath).isDirectory()) {
+              obj[file] = {};
+              getFolderStructure(fullPath, obj[file]);
+            } else {
+              obj[file] = {};
+            }
+          });
+        };
+
+        getFolderStructure(directoryPath, folderStructure);
+
+        const json = JSON.stringify(folderStructure);
+        fs.writeFileSync('folder_structure.json', json);"
