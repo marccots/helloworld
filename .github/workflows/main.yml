@@ -41,7 +41,10 @@ jobs:
 
         const json = JSON.stringify(folderStructure);
         fs.writeFileSync('folder_structure.json', json);"
-        
+      
+    - name: Install @actions/github
+      run: npm install @actions/github  
+    
     - name: Commit and push JSON file
       uses: actions/github-script@v3
       env:
