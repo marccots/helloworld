@@ -42,5 +42,17 @@ jobs:
         const json = JSON.stringify(folderStructure);
         fs.writeFileSync('folder_structure.json', json);"
         
-    - name: Check json file
-      run: ls -la
+    - name: Commit and push JSON file
+      uses: actions/github-script@v3
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        script: |
+          const { git, GitHub } = require("@actions/github")
+          const { execSync } = require("child_process")
+          // Add the JSON file
+          execSync("git add folder_structure.json")
+          // Commit the file
+          execSync("git commit -m 'Add folder_structure.json'")
+          // Push the commit
+          git.push("origin", "HEAD:master")
